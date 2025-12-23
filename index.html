@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>De Pottenbak-Quest 🏺</title>
+  <title>De Jacht naar Hind haar 25e verjaardagscadeau 🎁</title>
   <style>
     :root{
       --bg:#0b0f14; --card:#111826; --text:#e7eefc; --muted:#a7b3c8;
@@ -23,7 +23,7 @@
       border-radius:18px; padding:22px; box-shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
     header{display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;}
-    h1{margin:0; font-size:1.4rem; letter-spacing:.2px}
+    h1{margin:0; font-size:1.35rem; letter-spacing:.2px}
     .sub{margin:6px 0 0; color:var(--muted); line-height:1.4}
     .pill{
       display:inline-flex; align-items:center; gap:8px;
@@ -66,7 +66,6 @@
     .tiny{opacity:.85}
     .hidden{display:none}
 
-    /* tiny confetti */
     .confetti { position: fixed; inset: 0; pointer-events:none; overflow:hidden; }
     .confetti i{
       position:absolute; top:-12px; width:8px; height:12px; border-radius:2px;
@@ -83,10 +82,10 @@
     <div class="card">
       <header>
         <div>
-          <h1>De Pottenbak-Quest 🏺</h1>
-          <p class="sub">10 raadsels. 1 bestemming. En jij bent de hoofdrolspeler. 👀</p>
+          <h1>De Jacht naar Hind haar 25e verjaardagscadeau 🎁</h1>
+          <p class="sub">10 vragen. 10 sleutels. Pas op het einde krijg je de reveal. 🕵️‍♀️</p>
         </div>
-        <div class="pill"><span id="counter">Stap 1/10</span> • <span id="status">Locked & loaded</span></div>
+        <div class="pill"><span id="counter">Stap 1/10</span> • <span id="status">Start</span></div>
       </header>
 
       <div class="bar" aria-label="Voortgang">
@@ -100,14 +99,13 @@
       <div class="row" id="inputRow">
         <input id="answer" type="text" placeholder="Typ je antwoord…" autocomplete="off" />
         <button id="check">Check</button>
-        <button id="skip" title="Handig om te testen (niet gebruiken bij cadeau)">Test-skip</button>
       </div>
 
       <p class="msg" id="msg"></p>
 
       <div class="footer">
-        <div>🧩 <span id="mood">Mystery-mode</span></div>
-        <div class="tiny">PS: als je probeert te cheaten… ik zie het. (nee oké, niet echt) 😄</div>
+        <div>🧩 <span id="mood">Hint-hunt mode</span></div>
+        <div class="tiny">Spieken in de code? Mag… maar dan ben je officieel een schurk. 😄</div>
       </div>
     </div>
   </div>
@@ -115,77 +113,73 @@
   <div class="confetti" id="confetti"></div>
 
 <script>
-/**
- * ✅ Pas hier enkel je 10 raadsels + antwoorden aan.
- * - answer: het verwachte antwoord (kleine letters aangeraden)
- * - Je kan meerdere geldige antwoorden meegeven via: answers: ["a", "b"]
- */
+// ✅ Pas hier je 10 vragen + antwoorden aan.
+// Stap 1–9: enkel hints (niet verklappen).
+// Stap 10: reveal-tekst (die verschijnt na het laatste juiste antwoord).
 const STEPS = [
   {
-    title: "Stap 1 — De start",
-    riddle: "Ik ben warm, maar geen zon.\nIk draai rond, maar ben geen planeet.\nIk maak van klei een droom.\nWat ben ik?",
-    answers: ["draaischijf", "pottenbakkersschijf"]
+    title: "Vraag 1 — Warm/koud",
+    riddle: "Hint #1: Het heeft te maken met iets dat soms warm wordt.\n\nWat is het tegenovergestelde van ‘koud’?",
+    answers: ["warm"]
   },
   {
-    title: "Stap 2 — Het materiaal",
-    riddle: "Ik ben zacht als ik nat ben,\nhard als ik gebakken word.\nIk ben geen koek.\nWat ben ik?",
+    title: "Vraag 2 — Handen",
+    riddle: "Hint #2: Je hebt vooral je handen nodig.\n\nWelke 5-letterige meervoudsvorm hoort bij ‘hand’?",
+    answers: ["handen"]
+  },
+  {
+    title: "Vraag 3 — Materiaal",
+    riddle: "Hint #3: Het begint met een natuurlijk materiaal.\n\nWelke stof gebruiken mensen om dingen te vormen vóór ze hard worden?",
     answers: ["klei"]
   },
   {
-    title: "Stap 3 — De tool",
-    riddle: "Ik snij zonder mes,\nik meet zonder lint,\nik help je recht.\nWie ben ik? (1 woord)",
-    answers: ["rib", "ribje", "ribtool"]
+    title: "Vraag 4 — Beweging",
+    riddle: "Hint #4: Er zit beweging in.\n\nWat doet iets dat rondgaat? (1 werkwoord)",
+    answers: ["draaien", "draait"]
   },
   {
-    title: "Stap 4 — Water",
-    riddle: "Te veel van mij en alles zakt.\nTe weinig van mij en alles scheurt.\nIk ben de stress van de pottenbakker.\nWat ben ik?",
-    answers: ["water"]
+    title: "Vraag 5 — Plaats",
+    riddle: "Hint #5: Dit gebeurt meestal in een specifieke ruimte.\n\nHoe noem je een creatieve werkplek? (1 woord)",
+    answers: ["atelier", "studio", "werkplaats"]
   },
   {
-    title: "Stap 5 — Het proces",
-    riddle: "Eerst ben ik leer,\ndan ben ik bot.\nIk klink dof, dan scherp.\nWelke fase bedoel ik? (2 woorden)",
-    answers: ["leerhard", "leer hard", "leer-harde"]
+    title: "Vraag 6 — Resultaat",
+    riddle: "Hint #6: Je maakt iets dat je kan vasthouden.\n\nWat is een ander woord voor ‘voorwerp’?",
+    answers: ["object", "ding"]
   },
   {
-    title: "Stap 6 — De oven",
-    riddle: "Ik ben een kamer die heter is dan je ex.\nIk maak alles definitief.\nWaar ga ik over?",
-    answers: ["oven", "keramiekoven", "pottenbakkersoven"]
+    title: "Vraag 7 — Afwerking",
+    riddle: "Hint #7: Op het einde komt er vaak een laagje op.\n\nWat noem je een beschermlaag die ook mooi kan glanzen?",
+    answers: ["glazuur", "lak"]
   },
   {
-    title: "Stap 7 — Het glanslaagje",
-    riddle: "Ik ben vloeibaar, maar eindig als glas.\nIk kan mat of blinkend zijn.\nWat ben ik?",
-    answers: ["glazuur", "glazuren"]
+    title: "Vraag 8 — Tijd",
+    riddle: "Hint #8: Het is niet instant.\n\nWat is het tegenovergestelde van ‘snel’?",
+    answers: ["traag", "langzaam"]
   },
   {
-    title: "Stap 8 — Kleur",
-    riddle: "Ik zit soms onder het glazuur,\nvaak op natte klei,\nen ik kleur jouw verhaal.\nWat ben ik?",
-    answers: ["engobe", "slip"]
+    title: "Vraag 9 — Samen",
+    riddle: "Hint #9: Dit is leuker met twee.\n\nVul aan: ‘samen ___’ (1 woord)",
+    answers: ["doen", "maken", "zijn"]
   },
   {
-    title: "Stap 9 — De hint",
-    riddle: "Waar klei mensen blij maakt,\nwaar handen vies mogen worden,\nwaar draaien een hobby is.\nWat zoek je? (1 woord)",
-    answers: ["atelier", "studio", "workshop"]
-  },
-  {
-    title: "Stap 10 — Finale",
-    riddle: "Vul dit in om je cadeau te ontgrendelen:\n\n'Ik ga met jou ________.'",
-    answers: ["pottenbakken", "keramieken", "draaien"]
+    title: "Vraag 10 — Finale sleutel",
+    riddle: "Laatste stap.\n\nVul aan met één woord:\n‘We gaan samen ________.’",
+    answers: ["pottenbakken"]
   }
 ];
 
-// ------------------ engine ------------------
+// ------------ engine ------------
 const $ = (id) => document.getElementById(id);
-const state = {
-  step: Number(localStorage.getItem("pbq_step") || "0"),
-};
+const state = { step: Number(localStorage.getItem("hind25_step") || "0") };
 
 function normalize(s){
   return (s || "")
     .toString()
     .trim()
     .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // remove accents
-    .replace(/\s+/g, " "); // collapse spaces
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ");
 }
 
 function setMsg(text, type=""){
@@ -197,7 +191,7 @@ function setMsg(text, type=""){
 function confettiBurst(){
   const host = $("confetti");
   host.innerHTML = "";
-  const pieces = 24;
+  const pieces = 26;
   for(let i=0;i<pieces;i++){
     const p = document.createElement("i");
     const left = Math.random()*100;
@@ -227,16 +221,29 @@ function render(){
   $("answer").value = "";
   $("answer").focus();
 
-  if(state.step >= total){
-    // not expected (we cap), but just in case
-    finish();
-  } else {
-    $("status").textContent = "Solve it 😈";
-    setMsg("");
-  }
+  $("status").textContent = "Unlock de volgende hint";
+  setMsg("");
+}
 
-  // hide skip if you want:
-  // $("skip").classList.add("hidden");
+function finish(){
+  $("status").textContent = "Unlocked 🏁";
+  $("progress").style.width = `100%`;
+  $("stepTitle").textContent = "REVEAL 🎉";
+  $("riddle").textContent =
+`YES! Je hebt alle 10 sleutels gevonden.
+
+🎁 Hind haar cadeau:
+We gaan samen POTTEBAKKEN 🏺✨
+
+📍 Praktisch:
+- (hier zet jij datum/uur)
+- (atelier/plaats)
+- (eventueel een leuke boodschap)
+
+P.S. Jij hebt dit verdiend.`;
+  $("inputRow").classList.add("hidden");
+  setMsg("Happy 25! 🥳", "good");
+  localStorage.removeItem("hind25_step");
 }
 
 function checkAnswer(){
@@ -253,56 +260,25 @@ function checkAnswer(){
   }
 
   if(ok){
-    setMsg("Correct! 🔓", "good");
     confettiBurst();
+    setMsg("Correct! 🔓", "good");
     state.step++;
 
     if(state.step >= total){
-      // completed all 10
-      localStorage.setItem("pbq_step", String(total-1)); // keep on finale screen
       finish();
       return;
     }
 
-    localStorage.setItem("pbq_step", String(state.step));
-    setTimeout(render, 450);
+    localStorage.setItem("hind25_step", String(state.step));
+    setTimeout(render, 420);
   } else {
-    setMsg("Nope… probeer nog eens. (Tip: denk simpel) 😉", "bad");
+    setMsg("Nope… probeer opnieuw 😉", "bad");
   }
 }
 
-function finish(){
-  $("status").textContent = "Unlocked 🏁";
-  $("progress").style.width = `100%`;
-  $("stepTitle").textContent = "Cadeau ontgrendeld 🎁";
-  $("riddle").textContent =
-`Yes! Je hebt het gehaald.
-
-Je cadeau: we gaan samen POTTEBAKKEN 🏺✨
-
-📍 Locatie-hint:
-(zet hier je echte locatie / datum / afspraak-link / QR-code tekst)
-
-Voorbeeld:
-"Zaterdag 13 januari om 14:00 — Atelier [NAAM] — [ADRES]"
-`;
-
-  $("inputRow").classList.add("hidden");
-  setMsg("Stuur mij nu een screenshot van je overwinning. Grapje. Of toch niet. 😄", "good");
-}
-
-// events
 $("check").addEventListener("click", checkAnswer);
-$("answer").addEventListener("keydown", (e)=>{
-  if(e.key === "Enter") checkAnswer();
-});
-$("skip").addEventListener("click", ()=>{
-  state.step = Math.min(state.step + 1, STEPS.length-1);
-  localStorage.setItem("pbq_step", String(state.step));
-  render();
-});
+$("answer").addEventListener("keydown", (e)=>{ if(e.key === "Enter") checkAnswer(); });
 
-// init
 render();
 </script>
 </body>
