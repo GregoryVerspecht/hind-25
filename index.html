@@ -52,7 +52,7 @@
     button{
       padding:12px 14px; border-radius:12px; border:1px solid var(--line);
       background:rgba(255,255,255,0.05); color:var(--text); cursor:pointer;
-      transition:transform .05s ease, background .2s ease;
+      transition:transform .05s ease, background .2s ease, opacity .2s ease;
     }
     button:hover{background:rgba(255,255,255,0.08)}
     button:active{transform:translateY(1px)}
@@ -96,12 +96,11 @@
       <h2 class="stepTitle" id="stepTitle"></h2>
       <p class="riddle" id="riddle"></p>
 
-    <div class="row" id="inputRow">
-    <input id="answer" type="text" placeholder="Typ je antwoord…" autocomplete="off" />
-    <button id="check">Check</button>
-    <button id="help" style="opacity:.75">Hind nodig? 😇</button>
-    </div>
-
+      <div class="row" id="inputRow">
+        <input id="answer" type="text" placeholder="Typ je antwoord…" autocomplete="off" />
+        <button id="check">Check</button>
+        <button id="help" style="opacity:.75">Hind nodig? 😇</button>
+      </div>
 
       <p class="msg" id="msg"></p>
 
@@ -115,65 +114,106 @@
   <div class="confetti" id="confetti"></div>
 
 <script>
-// ✅ Pas hier je 10 vragen + antwoorden aan.
-// Stap 1–9: enkel hints (niet verklappen).
-// Stap 10: reveal-tekst (die verschijnt na het laatste juiste antwoord).
+// ✅ Stap 1–9: enkel hints (niet verklappen).
+// ✅ Stap 10: reveal verschijnt pas als ze alles juist heeft.
 const STEPS = [
   {
     title: "Vraag 1 — Warm/koud",
     riddle: "Hint #1: Het heeft te maken met iets dat soms warm wordt.\n\nWat is het tegenovergestelde van ‘koud’?",
-    answers: ["warm"]
+    answers: ["warm"],
+    help: [
+      "Hind-tip 👀: Dit is zo letterlijk dat zelfs Google het saai vindt. 😄",
+      "Antwoord ✅: warm"
+    ]
   },
   {
     title: "Vraag 2 — Handen",
     riddle: "Hint #2: Je hebt vooral je handen nodig.\n\nWelke 5-letterige meervoudsvorm hoort bij ‘hand’?",
-    answers: ["handen"]
+    answers: ["handen"],
+    help: [
+      "Hind-sight 👀: Denk niet te creatief… gewoon Nederlands niveau ‘maandag’ 😅",
+      "Antwoord ✅: handen"
+    ]
   },
   {
     title: "Vraag 3 — Materiaal",
     riddle: "Hint #3: Het begint met een natuurlijk materiaal.\n\nWelke stof gebruiken mensen om dingen te vormen vóór ze hard worden?",
-    answers: ["klei"]
+    answers: ["klei"],
+    help: [
+      "Hind-tip 👀: Het is niet deeg. Al lijkt het soms wel zo. 😄",
+      "Antwoord ✅: klei"
+    ]
   },
   {
     title: "Vraag 4 — Beweging",
     riddle: "Hint #4: Er zit beweging in.\n\nWat doet iets dat rondgaat? (1 werkwoord)",
-    answers: ["draaien", "draait"]
+    answers: ["draaien", "draait"],
+    help: [
+      "Hind-sight 👀: Als je dit doet op een bureaustoel, word je duizelig.",
+      "Antwoord ✅: draaien (of: draait)"
+    ]
   },
   {
     title: "Vraag 5 — Plaats",
     riddle: "Hint #5: Dit gebeurt meestal in een specifieke ruimte.\n\nHoe noem je een creatieve werkplek? (1 woord)",
-    answers: ["atelier", "studio", "werkplaats"]
+    answers: ["atelier", "studio", "werkplaats"],
+    help: [
+      "Hind-tip 👀: Waar creativiteit woont en rommel legaal is.",
+      "Antwoord ✅: atelier (ook goed: studio / werkplaats)"
+    ]
   },
   {
     title: "Vraag 6 — Resultaat",
     riddle: "Hint #6: Je maakt iets dat je kan vasthouden.\n\nWat is een ander woord voor ‘voorwerp’?",
-    answers: ["object", "ding"]
+    answers: ["object", "ding"],
+    help: [
+      "Hind-sight 👀: Het meest universele woord in het Nederlands… ‘dat… euh…’ 😄",
+      "Antwoord ✅: ding (ook goed: object)"
+    ]
   },
   {
     title: "Vraag 7 — Afwerking",
     riddle: "Hint #7: Op het einde komt er vaak een laagje op.\n\nWat noem je een beschermlaag die ook mooi kan glanzen?",
-    answers: ["glazuur", "lak"]
+    answers: ["glazuur", "lak"],
+    help: [
+      "Hind-tip 👀: Denk ‘glans’, maar dan niet lipgloss. 😉",
+      "Antwoord ✅: glazuur (ook goed: lak)"
+    ]
   },
   {
     title: "Vraag 8 — Tijd",
     riddle: "Hint #8: Het is niet instant.\n\nWat is het tegenovergestelde van ‘snel’?",
-    answers: ["traag", "langzaam"]
+    answers: ["traag", "langzaam"],
+    help: [
+      "Hind-sight 👀: Het tempo waarop je “nog één aflevering” zegt… en het is ineens 02:00.",
+      "Antwoord ✅: traag (ook goed: langzaam)"
+    ]
   },
   {
     title: "Vraag 9 — Samen",
     riddle: "Hint #9: Dit is leuker met twee.\n\nVul aan: ‘samen ___’ (1 woord)",
-    answers: ["doen", "maken", "zijn"]
+    answers: ["doen", "maken", "zijn"],
+    help: [
+      "Hind-tip 👀: Het woord dat je gebruikt als je iemand meekrijgt in je plan. 😇",
+      "Antwoord ✅: doen (ook goed: maken / zijn)"
+    ]
   },
   {
     title: "Vraag 10 — Finale sleutel",
     riddle: "Laatste stap.\n\nVul aan met één woord:\n‘We gaan samen ________.’",
-    answers: ["pottenbakken"]
+    answers: ["pottenbakken"],
+    help: [
+      "Hind-sight 👀: Het is een activiteit met klei, handen, draaien… en misschien een klein beetje chaos.",
+      "Antwoord ✅: pottenbakken"
+    ]
   }
 ];
 
 // ------------ engine ------------
 const $ = (id) => document.getElementById(id);
 const state = { step: Number(localStorage.getItem("hind25_step") || "0") };
+
+let helpClicks = 0; // 🔑 reset per vraag
 
 function normalize(s){
   return (s || "")
@@ -225,6 +265,8 @@ function render(){
 
   $("status").textContent = "Unlock de volgende hint";
   setMsg("");
+
+  helpClicks = 0; // reset Hind-hulp per vraag
 }
 
 function finish(){
@@ -278,7 +320,42 @@ function checkAnswer(){
   }
 }
 
+// Hind-help: 1e klik = extra hint, 2e klik = antwoord + invullen, 3e klik = verder
+function hindHelp(){
+  const stepObj = STEPS[state.step];
+  if(!stepObj || !stepObj.help){
+    setMsg("Zelfs Hind heeft hier geen hint voor 😄", "bad");
+    return;
+  }
+
+  helpClicks++;
+
+  if(helpClicks === 1){
+    setMsg(stepObj.help[0], "good");
+    $("status").textContent = "Hind-sight geactiveerd 👀";
+  } else if(helpClicks === 2){
+    setMsg(stepObj.help[1], "good");
+    $("answer").value = stepObj.answers[0];
+    $("answer").focus();
+    $("status").textContent = "Oké oké… bijna daar 😇";
+  } else {
+    // derde klik: genade, ga door
+    confettiBurst();
+    setMsg("We skippen deze. Hind zegt: vooruit dan 😄", "good");
+    state.step++;
+
+    if(state.step >= STEPS.length){
+      finish();
+      return;
+    }
+
+    localStorage.setItem("hind25_step", String(state.step));
+    setTimeout(render, 420);
+  }
+}
+
 $("check").addEventListener("click", checkAnswer);
+$("help").addEventListener("click", hindHelp);
 $("answer").addEventListener("keydown", (e)=>{ if(e.key === "Enter") checkAnswer(); });
 
 render();
