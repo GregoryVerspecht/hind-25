@@ -119,96 +119,97 @@
 // ✅ Stap 10: reveal verschijnt pas als ze alles juist heeft.
 const STEPS = [
   {
-    title: "Vraag 1 — Warm/koud",
-    riddle: "Hint #1: Het heeft te maken met iets dat soms warm wordt.\n\nWat is het tegenovergestelde van ‘koud’?",
+    title: "Vraag 1 — Warm",
+    riddle: "Hint #1: Dit cadeau heeft te maken met warmte.\n\nWat is het tegenovergestelde van ‘koud’?",
     answers: ["warm"],
     help: [
-      "Hind-tip 👀: Dit is zo letterlijk dat zelfs Google het saai vindt. 😄",
+      "Hind-hint 💡: Geen metaforen. Gewoon letterlijk.",
       "Antwoord ✅: warm"
     ]
   },
   {
-    title: "Vraag 2 — Handen",
-    riddle: "Hint #2: Je hebt vooral je handen nodig.\n\nWelke 5-letterige meervoudsvorm hoort bij ‘hand’?",
-    answers: ["handen"],
+    title: "Vraag 2 — Samen",
+    riddle: "Hint #2: Dit doe je niet alleen.\n\nVul aan: ‘samen ___’ (1 woord)",
+    answers: ["koken", "eten", "maken"],
     help: [
-      "Hind-sight 👀: Denk niet te creatief… gewoon Nederlands niveau ‘maandag’ 😅",
-      "Antwoord ✅: handen"
+      "Hind-hint 💡: Het is leuker als je het deelt.",
+      "Antwoord ✅: koken (ook goed: eten / maken)"
     ]
   },
   {
-    title: "Vraag 3 — Materiaal",
-    riddle: "Hint #3: Het begint met een natuurlijk materiaal.\n\nWelke stof gebruiken mensen om dingen te vormen vóór ze hard worden?",
-    answers: ["klei"],
+    title: "Vraag 3 — Plaats",
+    riddle: "Hint #3: Dit gebeurt meestal binnen.\n\nWaar maak je eten klaar?",
+    answers: ["keuken"],
     help: [
-      "Hind-tip 👀: Het is niet deeg. Al lijkt het soms wel zo. 😄",
-      "Antwoord ✅: klei"
+      "Hind-hint 💡: Niet de living. Ook niet de badkamer. 😄",
+      "Antwoord ✅: keuken"
     ]
   },
   {
-    title: "Vraag 4 — Beweging",
-    riddle: "Hint #4: Er zit beweging in.\n\nWat doet iets dat rondgaat? (1 werkwoord)",
-    answers: ["draaien", "draait"],
-    help: [
-      "Hind-sight 👀: Als je dit doet op een bureaustoel, word je duizelig.",
-      "Antwoord ✅: draaien (of: draait)"
-    ]
-  },
-  {
-    title: "Vraag 5 — Plaats",
-    riddle: "Hint #5: Dit gebeurt meestal in een specifieke ruimte.\n\nHoe noem je een creatieve werkplek? (1 woord)",
-    answers: ["atelier", "studio", "werkplaats"],
-    help: [
-      "Hind-tip 👀: Waar creativiteit woont en rommel legaal is.",
-      "Antwoord ✅: atelier (ook goed: studio / werkplaats)"
-    ]
-  },
-  {
-    title: "Vraag 6 — Resultaat",
-    riddle: "Hint #6: Je maakt iets dat je kan vasthouden.\n\nWat is een ander woord voor ‘voorwerp’?",
-    answers: ["object", "ding"],
-    help: [
-      "Hind-sight 👀: Het meest universele woord in het Nederlands… ‘dat… euh…’ 😄",
-      "Antwoord ✅: ding (ook goed: object)"
-    ]
-  },
-  {
-    title: "Vraag 7 — Afwerking",
-    riddle: "Hint #7: Op het einde komt er vaak een laagje op.\n\nWat noem je een beschermlaag die ook mooi kan glanzen?",
-    answers: ["glazuur", "lak"],
-    help: [
-      "Hind-tip 👀: Denk ‘glans’, maar dan niet lipgloss. 😉",
-      "Antwoord ✅: glazuur (ook goed: lak)"
-    ]
-  },
-  {
-    title: "Vraag 8 — Tijd",
-    riddle: "Hint #8: Het is niet instant.\n\nWat is het tegenovergestelde van ‘snel’?",
+    title: "Vraag 4 — Tijd",
+    riddle: "Hint #4: Dit vraagt wat geduld.\n\nWat is het tegenovergestelde van ‘snel’?",
     answers: ["traag", "langzaam"],
     help: [
-      "Hind-sight 👀: Het tempo waarop je “nog één aflevering” zegt… en het is ineens 02:00.",
+      "Hind-hint 💡: Denk aan ‘slow’… maar dan in het Nederlands.",
       "Antwoord ✅: traag (ook goed: langzaam)"
     ]
   },
   {
-    title: "Vraag 9 — Samen",
-    riddle: "Hint #9: Dit is leuker met twee.\n\nVul aan: ‘samen ___’ (1 woord)",
-    answers: ["doen", "maken", "zijn"],
+    title: "Vraag 5 — Geur",
+    riddle: "Hint #5: Je ruikt het vaak al vóór je het ziet.\n\nWat verspreidt eten tijdens het koken?",
+    answers: ["geur", "aroma"],
     help: [
-      "Hind-tip 👀: Het woord dat je gebruikt als je iemand meekrijgt in je plan. 😇",
-      "Antwoord ✅: doen (ook goed: maken / zijn)"
+      "Hind-hint 💡: Je neus weet het antwoord.",
+      "Antwoord ✅: geur (ook goed: aroma)"
+    ]
+  },
+  {
+    title: "Vraag 6 — Smaak",
+    riddle: "Hint #6: Dit maakt eten speciaal.\n\nWat voeg je toe voor extra smaak?",
+    answers: ["kruiden", "specerijen"],
+    help: [
+      "Hind-hint 💡: Peper en zout zijn pas het begin 😉",
+      "Antwoord ✅: kruiden (ook goed: specerijen)"
+    ]
+  },
+  {
+    title: "Vraag 7 — Cultuur",
+    riddle: "Hint #7: Dit gerecht komt niet uit België.\n\nUit welk werelddeel komt het? (1 woord)",
+    answers: ["afrika"],
+    help: [
+      "Hind-hint 💡: Denk zon, kleuren en rijke smaken.",
+      "Antwoord ✅: Afrika"
+    ]
+  },
+  {
+    title: "Vraag 8 — Vorm",
+    riddle: "Hint #8: Het wordt gemaakt in iets speciaals.\n\nIs dit rond of vierkant?",
+    answers: ["rond"],
+    help: [
+      "Hind-hint 💡: Kijk naar de vorm van het deksel.",
+      "Antwoord ✅: rond"
+    ]
+  },
+  {
+    title: "Vraag 9 — Naam",
+    riddle: "Hint #9: Het gerecht en het kookgerei hebben dezelfde naam.\n\nWelke naam zoek je?",
+    answers: ["tajine", "tagine"],
+    help: [
+      "Hind-hint 💡: Je zit er héél dichtbij nu.",
+      "Antwoord ✅: tajine"
     ]
   },
   {
     title: "Vraag 10 — Finale sleutel",
-    riddle: "Laatste stap.\n\nVul aan met één woord:\n‘We gaan samen ________.’",
-    answers: ["pottenbakken"],
+    riddle: "Laatste stap.\n\nVul aan met één woord:\n‘We gaan samen een ________ workshop volgen.’",
+    answers: ["tajine"],
     help: [
-      "Hind-sight 👀: Het is een activiteit met klei, handen, draaien… en misschien een klein beetje chaos.",
-      "Antwoord ✅: pottenbakken"
+      "Hind-hint 💡: Alles wat je tot nu toe vond… komt hier samen.",
+      "Antwoord ✅: tajine"
     ]
   }
 ];
+
 
 // ------------ engine ------------
 const $ = (id) => document.getElementById(id);
@@ -278,7 +279,8 @@ function finish(){
 `YES! Je hebt alle 10 sleutels gevonden.
 
 🎁 Hind haar cadeau:
-We gaan samen POTTEBAKKEN 🏺✨
+We gaan samen een TAJINE-WORKSHOP volgen 🍲✨
+
 
 📍 Praktisch:
 - (hier zet jij datum/uur)
